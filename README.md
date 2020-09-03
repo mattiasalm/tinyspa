@@ -1,6 +1,6 @@
-# LZYSPA
+# @tinyspa/core
 
-Lazy loading SPA framework for static content. Small package size and fast loading.
+Lazy loading SPA framework with PWA support for static content. Small package size and fast loading.
 
 ## Configuration
 
