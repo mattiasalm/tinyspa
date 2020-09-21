@@ -1,11 +1,16 @@
 import { config } from './config';
-import { elementReference } from './elements';
 
 // Remove leading slash in string
 export const stripLeadingSlash = (str: string) => str.replace(/^\/+/i, '');
 
+export const log = (...args: any) => {
+  if (config.useVerboseLogging) {
+    console.log(args);
+  }
+};
+
 export const wait = async (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+  new Promise((resolve) => setTimeout(resolve, ms > 0 ? ms : 0));
 
 //
 // Check if url is considered to be a relative path
@@ -23,7 +28,7 @@ export const createContentUrlFromPath = (path: string) => {
   if (newPath === '') {
     newPath = config.pathToIndexContent;
   }
-  return `${config.directoryContent}/${newPath}.html`;
+  return `${config.contentDirectory}/${newPath}.html`;
 };
 
 //
@@ -39,7 +44,7 @@ export const setActiveLinks = (parent: Element, currentPath: string) => {
 
   // Set inactive
   links.forEach((link) =>
-    removeClassFromElement(link, config.classNameActiveLinkInNavigation),
+    removeClassFromElement(link, config.navigationActiveLinkClassName),
   );
 
   // Set active
@@ -51,28 +56,8 @@ export const setActiveLinks = (parent: Element, currentPath: string) => {
           stripLeadingSlash(currentPath),
     )
     .forEach((link) =>
-      addClassFromElement(link, config.classNameActiveLinkInNavigation),
+      addClassToElement(link, config.navigationActiveLinkClassName),
     );
-};
-
-export const hideSplashLoading = (loadingTime: number) => {
-  if (loadingTime > config.classNameRemovalDelaySplashLoading) {
-    if (!!elementReference.body) {
-      removeClassFromElement(
-        elementReference.body,
-        config.classNameSplashLoading,
-      );
-    }
-  } else {
-    setTimeout(() => {
-      if (!!elementReference.body) {
-        removeClassFromElement(
-          elementReference.body,
-          config.classNameSplashLoading,
-        );
-      }
-    }, config.classNameRemovalDelaySplashLoading - loadingTime);
-  }
 };
 
 export const removeClassFromElement = (
@@ -84,7 +69,7 @@ export const removeClassFromElement = (
   }
 };
 
-export const addClassFromElement = (
+export const addClassToElement = (
   element: Element | null,
   className: string,
 ) => {

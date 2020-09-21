@@ -1,19 +1,21 @@
 const defaultConfig = {
-  classNameActiveLinkInNavigation: 'active-link',
-  classNameKeyboardNavigationActive: 'keyboard-nav',
-  classNamePageTransition: '',
-  classNameRemovalDelayPageTransition: 0,
-  classNameRemovalDelaySplashLoading: 0,
-  classNameSplashLoading: '',
-  directoryContent: 'content',
+  callbackOnLoad: () => {},
+  callbackOnPageChange: () => {},
+  contentDirectory: 'content',
   domSelectorBody: 'body',
-  domSelectorContent: '#content',
-  domSelectorNavigation: '#nav',
+  domSelectorContent: 'main',
+  domSelectorMenuToggle: '#menu',
+  domSelectorNavigation: 'nav',
   loadIndexContentOnLoad: false,
+  navigationActiveLinkClassName: 'active-link',
+  navigationUsingKeyboardClassName: 'keyboard-nav',
+  navigationPageLoadDelay: 0,
+  pageTransitionClassName: '',
+  pageTransitionDuration: 0,
   pathFileNotFound: '/404',
-  pathToIndexContent: '/index', // the content to use for path '/'
-  pathToNavigationContent: '', // empty to not load anything dynamically
+  pathToIndexContent: '/index',
   useServiceWorker: true,
+  useVerboseLogging: false,
 };
 
 export type Config = typeof defaultConfig;

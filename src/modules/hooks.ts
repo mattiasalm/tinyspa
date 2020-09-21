@@ -1,15 +1,14 @@
 import {
   removeClassFromElement,
-  addClassFromElement,
-  hideSplashLoading,
+  addClassToElement,
   isRelativeUrl,
   isMac,
 } from './utils';
-import { loadContent, loadNavigation } from './load';
+import { loadContent } from './load';
 import {
   currentPath,
-  setActiveLinksInNavigation,
-  closeNavigation,
+  setActiveLinksInMenu,
+  closeMenu,
 } from './navigation';
 import { config } from './config';
 import { elementReference } from './elements';
@@ -19,21 +18,21 @@ import { elementReference } from './elements';
 // read path from window URL and load content corresponding to that
 // also load nav content
 const onLoad = () => {
-  const timeStart = performance.now();
-  let contentToLoad: Promise<any>[] = [loadNavigation()];
+  let contentToLoad: Promise<any>[] = [];
 
   if (currentPath() !== '/' || config.loadIndexContentOnLoad) {
-    contentToLoad = [...contentToLoad, loadContent(currentPath())];
+    contentToLoad = [...contentToLoad, loadContent(currentPath(), false)];
   }
 
   Promise.all(contentToLoad).then(() => {
-    setActiveLinksInNavigation();
-    hideSplashLoading(performance.now() - timeStart);
+    setActiveLinksInMenu();
   });
 
   if (config.useServiceWorker && 'serviceWorker' in navigator) {
     navigator.serviceWorker.register('../service-worker.js');
   }
+
+  config.callbackOnLoad();
 };
 
 //
@@ -45,7 +44,7 @@ const onClick = (event: MouseEvent) => {
   if (event.clientX && event.clientY) {
     removeClassFromElement(
       elementReference.body,
-      config.classNameKeyboardNavigationActive,
+      config.navigationUsingKeyboardClassName,
     );
   }
 
@@ -70,8 +69,8 @@ const onClick = (event: MouseEvent) => {
 
       // Load new content based on relative link path
       event.preventDefault();
-      closeNavigation();
-      loadContent(path).then(() => setActiveLinksInNavigation());
+      closeMenu();
+      loadContent(path, true, true).then(() => setActiveLinksInMenu());
     }
   }
 };
@@ -81,22 +80,22 @@ const onClick = (event: MouseEvent) => {
 // corresponding to the path
 const onPopState = (event: PopStateEvent) => {
   event.preventDefault();
-  closeNavigation();
-  loadContent(currentPath()).then(() => setActiveLinksInNavigation());
+  closeMenu();
+  loadContent(currentPath()).then(() => setActiveLinksInMenu());
 };
 
 const onKeyUp = (event: KeyboardEvent) => {
   // If using TAB key to navigate; enable keyboard navigation classname to body
-  if (event.which === 9) {
-    addClassFromElement(
+  if (event.key === 'Tab') {
+    addClassToElement(
       elementReference.body,
-      config.classNameKeyboardNavigationActive,
+      config.navigationUsingKeyboardClassName,
     );
   }
 
   // Close the menu by pressing ESC if it is open
-  if (event.which === 27) {
-    closeNavigation();
+  if (event.key === 'Escape') {
+    closeMenu();
   }
 };
 

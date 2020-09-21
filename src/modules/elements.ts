@@ -14,6 +14,7 @@ export interface ElementReference {
   body: Element | null;
   navigation: Element | null;
   content: Element | null;
+  menuToggle: Element | null;
 }
 
 export const elementReference: ElementReference = {
@@ -25,6 +26,13 @@ export const elementReference: ElementReference = {
     return (
       _elements.navigation ||
       _setElement('navigation', config.domSelectorNavigation)
+    );
+  },
+
+  get menuToggle() {
+    return (
+      _elements.navigation ||
+      _setElement('menuToggle', config.domSelectorMenuToggle)
     );
   },
 
