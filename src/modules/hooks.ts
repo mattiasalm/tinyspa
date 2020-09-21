@@ -5,11 +5,7 @@ import {
   isMac,
 } from './utils';
 import { loadContent } from './load';
-import {
-  currentPath,
-  setActiveLinksInMenu,
-  closeMenu,
-} from './navigation';
+import { currentPath, setActiveLinksInMenu, closeMenu } from './navigation';
 import { config } from './config';
 import { elementReference } from './elements';
 
