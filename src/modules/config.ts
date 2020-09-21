@@ -1,5 +1,7 @@
 const defaultConfig = {
+  // @ts-ignore
   callbackOnLoad: () => {},
+  // @ts-ignore
   callbackOnPageChange: () => {},
   contentDirectory: 'content',
   domSelectorBody: 'body',
