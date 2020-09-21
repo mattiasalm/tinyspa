@@ -1,7 +1,7 @@
 const defaultConfig = {
-  // @ts-ignore
+  // tslint:disable-next-line
   callbackOnLoad: () => {},
-  // @ts-ignore
+  // tslint:disable-next-line
   callbackOnPageChange: () => {},
   contentDirectory: 'content',
   domSelectorBody: 'body',

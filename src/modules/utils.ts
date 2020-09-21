@@ -5,7 +5,7 @@ export const stripLeadingSlash = (str: string) => str.replace(/^\/+/i, '');
 
 export const log = (...args: any) => {
   if (config.useVerboseLogging) {
-    // @ts-ignore
+    // tslint:disable-next-line
     console.log(args);
   }
 };
