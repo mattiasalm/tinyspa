@@ -1,1 +1,5 @@
-Auto add rel="noreferrer" to all links with target="_blank" and external links
+Auto add rel="noopener" to all links with target="_blank" and external links
+
+Add support for dark mode 
+
+Merge config with scripts
