@@ -10,6 +10,7 @@ export const setNewPath = (newPath: string) =>
 
 export const closeMenu = () => {
   if (!!elementReference.menuToggle) {
+    // Change this to use direct reference to input instead and check if it is a checkbox
     const inputElem = elementReference.menuToggle.querySelector('input');
     if (!!inputElem && inputElem.checked) {
       inputElem.checked = false;

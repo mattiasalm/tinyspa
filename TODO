@@ -1,1 +1,7 @@
 Auto add rel="noreferrer" to all links with target="_blank" and external links
+
+
+Kombinera config filer från scripts och core? Gör så att båda läser från samma "user config"
+
+Skanna "content" efter filer och skapa array för giltiga routes
+
