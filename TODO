@@ -1,7 +1,13 @@
 Auto add rel="noreferrer" to all links with target="_blank" and external links
 
-
 Kombinera config filer från scripts och core? Gör så att båda läser från samma "user config"
 
 Skanna "content" efter filer och skapa array för giltiga routes
 
+Auto add rel="noopener" to all links with target="_blank" and external links
+
+Add support for dark mode 
+
+Merge config with scripts
+
+Put config in separate config package?
